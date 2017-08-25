@@ -1,0 +1,32 @@
+STAGE=$1
+if [ "$STAGE" == "" ]
+then
+  STAGE=dev
+fi
+EP=`cat ../../src/plans/endpoint-$STAGE.txt`
+
+echo "ENDPOINT: $EP"
+echo -- CREATE
+PLAN=`curl -s -d @create.json --header "Content-Type:application/json" -X POST $EP/plans`
+echo RETURNED: $PLAN
+PLAN_ID=`echo $PLAN | grep -E -o '[0-9a-f]{8}-[0-9a-f]{4}-[^"]+'`
+echo ID: $PLAN_ID 
+echo .
+echo -- LIST
+curl $EP/plans
+echo .
+echo -- GET
+curl "$EP/plans/$PLAN_ID"
+echo .
+echo -- UPDATE
+curl -d @update.json -X PUT "$EP/plans/$PLAN_ID"
+echo .
+echo -- LIST
+curl $EP/plans
+echo .
+echo -- DELETE
+curl -X DELETE "$EP/plans/$PLAN_ID"
+echo .
+echo -- LIST
+curl $EP/plans
+echo .

@@ -1,0 +1,32 @@
+set -e
+STAGE=$1
+if [ "$STAGE" == "" ]
+then
+  STAGE=dev
+fi
+EP=`cat ../../src/users/endpoint-$STAGE.txt`
+
+echo "ENDPOINT: $EP"
+echo -- CREATE
+curl -d @create.json --header "Content-Type:application/json" -X POST $EP/users
+echo .
+echo -- LIST
+curl $EP/users
+echo .
+echo -- GET
+curl "$EP/users/foo@bar.com"
+echo .
+echo -- UPDATE
+curl -d @update.json -X PUT "$EP/users/foo@bar.com"
+echo .
+echo -- LIST
+curl $EP/users
+echo .
+echo -- DELETE
+curl -X DELETE "$EP/users/foo@bar.com"
+echo .
+echo -- LIST
+curl $EP/users
+echo .
+
+

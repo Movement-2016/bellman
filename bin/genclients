@@ -1,0 +1,15 @@
+cd src
+INDEX=../clients/$1.js
+echo "/* generated */ module.exports = { " > $INDEX
+for D in *; do
+    if [ -d "${D}" ]; then
+      if [ -e "${D}/serverless.yml" ] 
+      then
+        EP=`cat ${D}/endpoint-$1.txt`
+        echo "import s from './lib/Service'; module.exports = c => new s({...c,endpoint:'$EP',slug:'$D'});" > ../clients/$D-$1.js
+        echo "$D: require('./$D-$1')," >> $INDEX
+      fi
+    fi
+done
+echo "};" >> $INDEX
+echo "module.exports = { prod: require('./prod'), dev: require('./dev') };" > ../clients/index.js

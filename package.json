@@ -1,0 +1,25 @@
+{
+  "name": "bellman",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "test/users/test && test/plans/test",
+    "deploy-prod": "./bin/deploy prod",
+    "deploy-dev": "./bin/deploy dev",
+    "build-clients": "./bin/genclients prod && ./bin/genclients dev && babel -d ./dist --source-root clients clients"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "crypto-js": "^3.1.9-1"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.103.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "serverless-webpack": "^2.2.2",
+    "webpack-node-externals": "^1.6.0"
+  }
+}

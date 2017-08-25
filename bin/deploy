@@ -1,0 +1,11 @@
+for D in src/*; do
+    if [ -d "${D}" ]; then
+      if [ -e "${D}/serverless.yml" ] 
+      then
+        pushd "${D}" 
+        serverless deploy -s $1
+        ../../bin/getendpoints $1
+        popd
+      fi
+    fi
+done
