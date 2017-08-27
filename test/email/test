@@ -1,0 +1,19 @@
+STAGE=$1
+if [ "$STAGE" == "" ]
+then
+  STAGE=dev
+fi
+EP=`cat ../../src/email/endpoint-$STAGE.txt`
+
+echo "ENDPOINT: $EP"
+echo -- CONTACT
+curl -s -d @contact.json --header "Content-Type:application/json" -X POST $EP/contact
+echo .
+
+echo -- PARTY
+curl -s -d @party.json --header "Content-Type:application/json" -X POST $EP/party
+echo .
+
+echo -- PLAN
+curl -s -d @plan.json --header "Content-Type:application/json" -X POST $EP/plan
+echo .

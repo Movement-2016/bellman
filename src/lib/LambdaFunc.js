@@ -13,7 +13,8 @@ class LambdaFunc {
   }
 
   get body() {
-    return JSON.parse(this._event.body || {});
+    const { body = {} } = this._event;
+    return typeof body === 'string' ? JSON.parse(body) : body;
   }
 
   get queryParams() {
