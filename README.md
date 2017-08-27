@@ -5,7 +5,7 @@ Umbrella project for server side APIs used by Gamechanger Labs properties (movem
 
 ## Prerequisites
 
-This project requires the [serverless](serverless.com) framework. Install:
+This project requires the [serverless](http://serverless.com) framework. Install:
 
 ````
 npm i -g severless
