@@ -15,7 +15,7 @@ The prod stage require IAM credentials so the API, Lambda functions and Dynamodb
 
 ### Prerequisites
 
-This project requires the [serverless](serverless.com) framework. Install:
+This project requires the [serverless](http://serverless.com) framework. Install:
 
 ````
 npm i -g severless
