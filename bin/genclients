@@ -6,7 +6,13 @@ for D in *; do
       if [ -e "${D}/serverless.yml" ] 
       then
         EP=`cat ${D}/endpoint-$1.txt`
-        echo "import s from './lib/Service'; module.exports = c => new s({...c,endpoint:'$EP',slug:'$D'});" > ../clients/$D-$1.js
+        if [ -d "../clients/${D}" ]
+          then
+          BC=$D
+        else
+          BC=lib/Service
+        fi
+          echo "import s from './$BC'; module.exports = c => new s({...c,endpoint:'$EP',slug:'$D'});" > ../clients/$D-$1.js
         echo "$D: require('./$D-$1')," >> $INDEX
       fi
     fi

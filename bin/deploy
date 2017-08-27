@@ -1,10 +1,18 @@
+CMD=deploy
+if [ $2  ]
+then
+  CMD=$2
+fi
 for D in src/*; do
     if [ -d "${D}" ]; then
       if [ -e "${D}/serverless.yml" ] 
       then
         pushd "${D}" 
-        serverless deploy -s $1
-        ../../bin/getendpoints $1
+        serverless $CMD -s $1
+        if [ "${CMD}" == "deploy" ]
+        then
+          ../../bin/getendpoints $1
+        fi
         popd
       fi
     fi

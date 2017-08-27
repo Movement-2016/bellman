@@ -8,7 +8,7 @@ class ContactEmail extends LamdaFunc {
 
     const body      = this.body;
     const { email } = body;
-    const subject   = ' New contact form submission from ' + email;
+    const subject   = 'New contact form submission from ' + email;
 
     return mailer( { body: templates.contact(body), subject })
             .then( this.thenHandler )
@@ -38,8 +38,6 @@ class PlanEmail extends LamdaFunc {
     let   toWho   = _body.email;
     const subject = 'Your Giving Plan';
     const body    = templates.plan(_body);
-
-    toWho = 'victor.stone@gmail.com'; // <-- this is temp until we are out of the SES sandbox
 
     return mailer( { toWho, body, subject } )
             .then( () => mailer( { body, subject })) // send a copy to the admins
