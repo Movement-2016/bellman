@@ -29,27 +29,27 @@ var EmailClient = function (_Client) {
   _createClass(EmailClient, [{
     key: 'contact',
     value: function contact() {
-      return this._post.apply(this, arguments);
+      return this._post.apply(this, ['contact'].concat(Array.prototype.slice.call(arguments)));
     }
   }, {
     key: 'party',
     value: function party() {
-      return this._post.apply(this, arguments);
+      return this._post.apply(this, ['party'].concat(Array.prototype.slice.call(arguments)));
     }
   }, {
     key: 'plan',
     value: function plan() {
-      return this._post.apply(this, arguments);
+      return this._post.apply(this, ['plan'].concat(Array.prototype.slice.call(arguments)));
     }
   }, {
     key: '_post',
-    value: function _post(body) {
-      var additionalParams = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    value: function _post(cmd, body) {
+      var additionalParams = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
 
       var request = {
         verb: 'POST',
-        path: this.pathComponent + '/' + this.slug,
+        path: this.pathComponent + '/' + cmd,
         headers: headers,
         queryParams: queryParams,
         body: body
