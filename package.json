@@ -20,8 +20,6 @@
     "axios": "^0.16.2",
     "commaize": "git+https://github.com/victor-stone/commaize.git",
     "crypto-js": "^3.1.9-1",
-    "google-auth-library": "^0.10.0",
-    "googleapis": "^21.2.0",
     "html-entities": "^1.2.1",
     "request": "^2.81.0"
   },
@@ -30,9 +28,6 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babelify": "^7.3.0",
-    "map-stream": "0.0.7",
-    "serverless-gulp": "^1.0.10",
-    "serverless-plugin-browserifier": "^1.0.5",
     "serverless-webpack": "^2.2.2",
     "webpack-node-externals": "^1.6.0"
   }

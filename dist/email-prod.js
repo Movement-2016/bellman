@@ -9,5 +9,5 @@ var _email2 = _interopRequireDefault(_email);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = function (c) {
-  return new _email2.default(_extends({}, c, { endpoint: 'https://pnkwt0orx9.execute-api.us-west-2.amazonaws.com/prod', slug: 'email' }));
+  return new _email2.default(_extends({}, c, { endpoint: 'https://9gvdc17imc.execute-api.us-west-2.amazonaws.com/prod', slug: 'email' }));
 };
