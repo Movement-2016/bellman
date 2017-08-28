@@ -29,7 +29,7 @@ class EmailClient extends Client {
     };
     
     return this.client.makeRequest(request, additionalParams)
-              .then( ({ MessageId }) => MessageId )
+              .then( ({ data: { MessageId }}) => MessageId )
               .then( this.responseHandler )
               .catch( this.errorHandler );
   }

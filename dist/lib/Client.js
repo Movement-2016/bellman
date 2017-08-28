@@ -63,7 +63,7 @@ var Client = function () {
     value: function errorHandler(err) {
       var responseText = err.request.responseText;
 
-      var eobj = JSON.parse(responseText);
+      var eobj = responseText && JSON.parse(responseText) || { error: err.message };
       throw new Error(eobj.error);
     }
   }]);

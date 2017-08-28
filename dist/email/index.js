@@ -56,7 +56,7 @@ var EmailClient = function (_Client) {
       };
 
       return this.client.makeRequest(request, additionalParams).then(function (_ref) {
-        var MessageId = _ref.MessageId;
+        var MessageId = _ref.data.MessageId;
         return MessageId;
       }).then(this.responseHandler).catch(this.errorHandler);
     }

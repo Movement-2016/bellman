@@ -19,7 +19,7 @@ ${wantsConsult
 
 const footerTemplate = donations => `
 
-Your total contribution amount: $${commaize(donations.reduce( (sum,i) => sum + i.amount, 0))}
+Your total contribution amount: $${commaize(donations.reduce( (sum,i) => sum + Number(i.amount), 0))}
 
 Thank you so much for your generosity!
 

@@ -47,7 +47,7 @@ class Client
 
   errorHandler(err) {
     const {responseText} = err.request;
-    const eobj = JSON.parse(responseText);
+    const eobj = responseText && JSON.parse(responseText) || { error: err.message };
     throw new Error(eobj.error);
   }
   
