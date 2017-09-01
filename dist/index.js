@@ -5,33 +5,33 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 /* auto generated */
 var a = require('./lib/Service');
 
-var b = require('./deploy');
+var b = require('./email');
 
-var c = require('./email');
+var c = require('./deploy');
 
 var d = require('./email');
 
 module.exports = {
    prod: {
-      deploy: function deploy(cfg) {
-         return new b(_extends({}, cfg, { endpoint: 'https://f86r0juvaa.execute-api.us-west-2.amazonaws.com/prod', slug: 'deploy' }));
+      plans: function plans(cfg) {
+         return new a(_extends({}, cfg, { endpoint: 'https://l7y8vcdf01.execute-api.us-west-2.amazonaws.com/prod', slug: 'plans' }));
       },
       users: function users(cfg) {
          return new a(_extends({}, cfg, { endpoint: 'https://xds1htuk84.execute-api.us-west-2.amazonaws.com/prod', slug: 'users' }));
       },
       email: function email(cfg) {
-         return new c(_extends({}, cfg, { endpoint: 'https://9gvdc17imc.execute-api.us-west-2.amazonaws.com/prod', slug: 'email' }));
+         return new b(_extends({}, cfg, { endpoint: 'https://9gvdc17imc.execute-api.us-west-2.amazonaws.com/prod', slug: 'email' }));
       },
-      plans: function plans(cfg) {
-         return new a(_extends({}, cfg, { endpoint: 'https://l7y8vcdf01.execute-api.us-west-2.amazonaws.com/prod', slug: 'plans' }));
+      deploy: function deploy(cfg) {
+         return new c(_extends({}, cfg, { endpoint: 'https://f86r0juvaa.execute-api.us-west-2.amazonaws.com/prod', slug: 'deploy' }));
       } },
    dev: {
-      email: function email(cfg) {
-         return new d(_extends({}, cfg, { endpoint: 'https://wmg82tv0ka.execute-api.us-west-2.amazonaws.com/dev', slug: 'email' }));
-      },
       users: function users(cfg) {
          return new a(_extends({}, cfg, { endpoint: 'https://3wim9e9xf9.execute-api.us-west-2.amazonaws.com/dev', slug: 'users' }));
       },
       plans: function plans(cfg) {
          return new a(_extends({}, cfg, { endpoint: 'https://nof8onrfef.execute-api.us-west-2.amazonaws.com/dev', slug: 'plans' }));
+      },
+      email: function email(cfg) {
+         return new d(_extends({}, cfg, { endpoint: 'https://wmg82tv0ka.execute-api.us-west-2.amazonaws.com/dev', slug: 'email' }));
       } } };

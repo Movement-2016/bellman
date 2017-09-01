@@ -6,11 +6,11 @@ const queryParams = {};
 class DeployClient extends Client {
 
   deploy() {
-    return this._cmd('deploy');
+    return this._get('deploy');
   }
 
   build() {
-    return this._cmd('build');
+    return this._get('build');
   }
 
   _get(cmd) {

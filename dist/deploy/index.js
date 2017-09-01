@@ -29,12 +29,12 @@ var DeployClient = function (_Client) {
   _createClass(DeployClient, [{
     key: 'deploy',
     value: function deploy() {
-      return this._cmd('deploy');
+      return this._get('deploy');
     }
   }, {
     key: 'build',
     value: function build() {
-      return this._cmd('build');
+      return this._get('build');
     }
   }, {
     key: '_get',
