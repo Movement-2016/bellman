@@ -1,1 +1,0 @@
-https://nof8onrfef.execute-api.us-west-2.amazonaws.com/dev

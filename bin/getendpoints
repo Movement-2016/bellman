@@ -1,2 +1,0 @@
-EP=`serverless info -v -s $1 | node -e "process.stdin.on('data',(d) => {var m = d.toString().match( /ServiceEndpoint:\s([^\n]+)/ ); m && m[1] && console.log(m[1]); });"`
-echo $EP > endpoint-$1.txt

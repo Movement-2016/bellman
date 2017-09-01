@@ -8,7 +8,7 @@
     "deploy-prod": "./bin/deploy prod",
     "deploy-dev": "./bin/deploy dev",
     "remove": "./bin/deploy dev remove && ./bin/deploy prod remove",
-    "build-clients": "./bin/genclients prod && ./bin/genclients dev && babel -d ./dist --source-root clients clients"
+    "build-clients": "node bin/genclients && babel -d ./dist --source-root clients clients"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,8 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babelify": "^7.3.0",
+    "github": "^10.0.0",
+    "mime": "^1.4.0",
     "serverless-webpack": "^2.2.2",
     "webpack-node-externals": "^1.6.0"
   }

@@ -4,7 +4,7 @@ class Client
 {
   constructor(config) {
     if( typeof(config) === 'undefined' || !config.sessionToken ) {
-      throw 'Service requires session based AWS AIM login credentials';
+      //throw 'Service requires session based AWS AIM login credentials';
     }
 
     const { 

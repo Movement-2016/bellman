@@ -9,10 +9,6 @@ for D in src/*; do
       then
         pushd "${D}" 
         serverless $CMD -s $1
-        if [ "${CMD}" == "deploy" ]
-        then
-          ../../bin/getendpoints $1
-        fi
         popd
       fi
     fi

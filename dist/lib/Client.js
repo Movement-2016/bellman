@@ -15,7 +15,7 @@ var Client = function () {
     _classCallCheck(this, Client);
 
     if (typeof config === 'undefined' || !config.sessionToken) {
-      throw 'Service requires session based AWS AIM login credentials';
+      //throw 'Service requires session based AWS AIM login credentials';
     }
 
     var _config$region = config.region,

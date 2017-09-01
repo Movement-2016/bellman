@@ -1,1 +1,0 @@
-https://xds1htuk84.execute-api.us-west-2.amazonaws.com/prod
