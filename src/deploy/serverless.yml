@@ -1,0 +1,38 @@
+service: deploy
+
+plugins:
+  - serverless-webpack
+
+provider:
+  name: aws
+  state: prod
+  runtime: nodejs6.10
+  region: us-west-2
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:*
+      Resource: "arn:aws:s3:::movementvote/*"
+    - Effect: Allow
+      Action:
+        - codebuild:StartBuild
+      Resource: "arn:aws:codebuild:us-west-2:181472263199:project/MovementVote"
+
+functions:
+  build:
+    handler: handler.build
+    events:
+      - http:
+          path: build
+          method: get
+          cors: true
+#          authorizer: aws_iam
+  deploy:
+    handler: handler.deploy
+    events:
+      - http:
+          path: deploy
+          method: get
+          cors: true
+#          authorizer: aws_iam
+
