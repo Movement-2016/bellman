@@ -1,15 +1,11 @@
 # Deploy Static Website
 
-A utility Lambda to download/deploy a Github Repo into an S3 bucket
+A utility Lambda to build/deploy the MovementVote/concierge static website
 
+As of this writing there is no automated/continuous trigger, you manually invoke the /build script to start the process
 
-## Gotcha
+calling the /build script will start a build in AWS CodeBuild of the concierge project
 
-This will only UPDATE an existing installation. You need pre-populate the S3 bucket manually
+When that is done, a AWS CloudWatch event will trigger the /deploy script which will move the files already on our s3 bucket to the write place with the righ permissions.
 
-
-## Credits
-
-Based on this:
-
-https://raw.githubusercontent.com/nytlabs/github-s3-deploy/master/index.js
+API Gateway -> Lambda -> CodeBuild -> CloudWatch -> Lamba -> S3
