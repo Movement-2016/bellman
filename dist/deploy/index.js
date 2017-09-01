@@ -29,10 +29,20 @@ var DeployClient = function (_Client) {
   _createClass(DeployClient, [{
     key: 'deploy',
     value: function deploy() {
+      return this._cmd('deploy');
+    }
+  }, {
+    key: 'build',
+    value: function build() {
+      return this._cmd('build');
+    }
+  }, {
+    key: '_get',
+    value: function _get(cmd) {
 
       var request = {
         verb: 'GET',
-        path: this.pathComponent + '/deploy',
+        path: this.pathComponent + '/' + cmd,
         headers: headers,
         queryParams: queryParams,
         body: {}

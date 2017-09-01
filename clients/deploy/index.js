@@ -6,10 +6,18 @@ const queryParams = {};
 class DeployClient extends Client {
 
   deploy() {
+    return this._cmd('deploy');
+  }
+
+  build() {
+    return this._cmd('build');
+  }
+
+  _get(cmd) {
 
     var request = {
       verb: 'GET',
-      path: this.pathComponent + '/deploy',
+      path: this.pathComponent + '/' + cmd,
       headers,
       queryParams,
       body: {}
