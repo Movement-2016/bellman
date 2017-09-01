@@ -5,7 +5,7 @@ var glob = require('glob');
 var exec = require('child_process').exec;
 
 
-/****************************
+/**************************************************************
 
   Generate an index.js that we can export as the client SDK
   for our Lambda APIs.
@@ -84,7 +84,7 @@ const genJS = ({endpoint,stage,apiName}) => {
                       ? pushReq(apiName)
                       : serviceClass;
 
-  stages[stage][apiName] = ` c => new ${baseclass}({...c,endpoint:'${endpoint}',slug:'${apiName}'})`;
+  stages[stage][apiName] = ` cfg => new ${baseclass}({...cfg,endpoint:'${endpoint}',slug:'${apiName}'})`;
 };
 
 /*
