@@ -45,6 +45,17 @@ serverless remove -s prod
 serverless remove -s dev
 #...etc
 ````
+
+### Add an API
+
+To add an API:
+  - create a directory with API name under `src`
+  - copy `.gitignore`, `serverless.yml`, `webpack.config.js` from one of the other apis
+  - edit `serverless.yml` to spec
+  - create source file(s) for the new API
+  - if the new API is *not* a CRUD service then create a directory under `clients` and put an `index.js` with the client interface
+  - deploy your API: `serverless deploy -s prod` (or 'dev' for dev stage)
+
 ### Workflow
 
 Work on a specific function can be done and then just deploy that. For example, if you're working on the function 'update' you can deploy just that function 

@@ -3,7 +3,7 @@ service: contact
 custom: 
   stage: "${opt:stage, self:provider.stage}"
   devIAM: ''
-  prodIAM: aws_iam
+  prodIAM: '' # for now, allow for non logged in for all APIs, otherwise : aws_iam
 
 plugins:
   - serverless-webpack
