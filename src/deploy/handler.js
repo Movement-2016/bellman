@@ -41,9 +41,7 @@ class Deploy extends LambdaFunc {
 
     }).then( () => {
 
-      const params = newBuildFiles.map( key => (_calcMetadata(key,{ 
-                                                  CopySource: 'movementvote/' + key,
-                                                  Key: key.replace('MovementVote/dist/public/', ''),})) );
+      const params = newBuildFiles.map( key => (_calcParams(key,)) );
 
       return Promise.all( params.map( p => s3.copyObject( p ).promise() ) )
                      .then( results => results.map( ({CopyObjectResult}) => CopyObjectResult ) );
@@ -62,19 +60,22 @@ const map = {
   '.jpg': 'image/jpeg',
 };
 
-const _calcMetadata = (fname,args) => {
+const _calcParams = key => {
 
-  const ext = path.parse(fname).ext;
+  const args = { 
+          CopySource: 'movementvote/' + key,
+          Key: key.replace('MovementVote/dist/public/', ''),
+          Bucket: 'movementvote',                                                  
+          ACL: 'public-read',
+          ServerSideEncryption: null 
+        };
+  const ext = path.parse(key).ext;
   if( map[ext] ) {
     args.ContentType = map[ext];
     args.Metadata = {};
     args.MetadataDirective = 'REPLACE';
   }
-  return { ...args, 
-            Bucket: 'movementvote',                                                  
-            ACL: 'public-read',
-            ServerSideEncryption: null 
-        };
+  return args;
 };
 
 
