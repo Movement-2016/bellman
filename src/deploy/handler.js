@@ -1,6 +1,6 @@
 const AWS        = require('aws-sdk');
 const LambdaFunc = require('../lib/LambdaFunc');
-const path        = require('path');
+const path       = require('path');
 
 class StartBuild extends LambdaFunc {
   perform() {
@@ -41,9 +41,9 @@ class Deploy extends LambdaFunc {
 
     }).then( () => {
 
-      const params = newBuildFiles.map( key => (_calcParams(key,)) );
+      const params = newBuildFiles.map( _calcParams );
 
-      return Promise.all( params.map( p => s3.copyObject( p ).promise() ) )
+      return Promise.all( params.map( copyPromise(s3) ) )
                      .then( results => results.map( ({CopyObjectResult}) => CopyObjectResult ) );
     })
     .then( this.thenHandler )
@@ -52,29 +52,34 @@ class Deploy extends LambdaFunc {
   }
 }
 
+const copyPromise = s3 => p => s3.copyObject( p ).promise();
+
 const map = {
-  '.svg': 'image/svg+xml',
+  '.svg':  'image/svg+xml',
   '.html': 'text/html',
-  '.htm': 'text/html',
-  '.png': 'image/png',
-  '.jpg': 'image/jpeg',
+  '.htm':  'text/html',
+  '.png':  'image/png',
+  '.jpg':  'image/jpeg',
 };
 
 const _calcParams = key => {
 
   const args = { 
-          CopySource: 'movementvote/' + key,
-          Key: key.replace('MovementVote/dist/public/', ''),
-          Bucket: 'movementvote',                                                  
-          ACL: 'public-read',
+          CopySource:          'movementvote/' + key,
+          Key:                 key.replace('MovementVote/dist/public/', ''),
+          Bucket:              'movementvote',                                                  
+          ACL:                 'public-read',
           ServerSideEncryption: null 
         };
+
   const ext = path.parse(key).ext;
+
   if( map[ext] ) {
     args.ContentType = map[ext];
     args.Metadata = {};
     args.MetadataDirective = 'REPLACE';
   }
+
   return args;
 };
 
