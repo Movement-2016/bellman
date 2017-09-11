@@ -1,6 +1,6 @@
 const AWS        = require('aws-sdk');
 const LambdaFunc = require('../lib/LambdaFunc');
-
+const path        = require('path');
 
 class StartBuild extends LambdaFunc {
   perform() {
@@ -41,19 +41,42 @@ class Deploy extends LambdaFunc {
 
     }).then( () => {
 
-      const params = newBuildFiles.map( key => ({ Bucket: 'movementvote',
+      const params = newBuildFiles.map( key => (_calcMetadata(key,{ 
                                                   CopySource: 'movementvote/' + key,
-                                                  Key: key.replace('MovementVote/dist/public/', ''),
-                                                  ACL: 'public-read',
-                                                  ServerSideEncryption: null }) );
+                                                  Key: key.replace('MovementVote/dist/public/', ''),})) );
 
-      return Promise.all( params.map( p => s3.copyObject( p ).promise() ) ).then( results => results.map( ({CopyObjectResult}) => CopyObjectResult ) );
+      return Promise.all( params.map( p => s3.copyObject( p ).promise() ) )
+                     .then( results => results.map( ({CopyObjectResult}) => CopyObjectResult ) );
     })
     .then( this.thenHandler )
     .catch( this.errorHandler );
 
   }
 }
+
+const map = {
+  '.svg': 'image/svg+xml',
+  '.html': 'text/html',
+  '.htm': 'text/html',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+};
+
+const _calcMetadata = (fname,args) => {
+
+  const ext = path.parse(fname).ext;
+  if( map[ext] ) {
+    args.ContentType = map[ext];
+    args.Metadata = {};
+    args.MetadataDirective = 'REPLACE';
+  }
+  return { ...args, 
+            Bucket: 'movementvote',                                                  
+            ACL: 'public-read',
+            ServerSideEncryption: null 
+        };
+};
+
 
 module.exports = {
   build: (new StartBuild()).handler,
