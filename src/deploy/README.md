@@ -2,15 +2,15 @@
 
 A utility Lambda to remote build and deploy the MovementVote/concierge static website.
 
-As of this writing there is no automated/continuous trigger, you manually invoke the Lambda /build script to start the process.
+You manually invoke the 'build' Lambda script to start the process.
 
     Local script ->  
-    API Gateway ('/build') -> 
-    Lambda ('deploy-prod-build') -> 
-    CodeBuild ('MovementVote') -> 
-    CloudWatch ('TriggerDeployAfterBuild') -> 
-    Lamba ('deploy-prod-deploy') ->
-    S3 (movementvote)
+      API Gateway  ('/build') -> 
+      Lambda       ('deploy-prod-build') -> 
+      CodeBuild    ('MovementVote') -> 
+      CloudWatch   ('TriggerDeployAfterBuild') -> 
+      Lamba        ('deploy-prod-deploy') ->
+      S3           ('movementvote')
 
 Several things need to be in place in order to trigger the remote build and deploy Lambda build scripts from a command line like `npm run deploy`
 
@@ -55,7 +55,7 @@ There is a CodeBuild project called [MovementVote](https://us-west-2.console.aws
     ]
 }
 ```
-The actual build rules are in the `buildspec.yml` file in the root of the `concierge` project.
+The build rules are in the [buildspec.yml](https://github.com/Movement-2016/concierge/blob/master/buildspec.yml) in the `concierge` project.
 
 ## Role (for Triggering Build)
 
