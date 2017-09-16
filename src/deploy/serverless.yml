@@ -12,7 +12,7 @@ provider:
     - Effect: Allow
       Action:
         - s3:*
-      Resource: "arn:aws:s3:::movementvote/*"
+      Resource: "arn:aws:s3:::movementvote.org/*"
     - Effect: Allow
       Action:
         - codebuild:StartBuild

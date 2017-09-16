@@ -2,12 +2,18 @@ const AWS        = require('aws-sdk');
 const LambdaFunc = require('../lib/LambdaFunc');
 const path       = require('path');
 
+const BUCKET_NAME        = 'movementvote.org';
+const BUILD_PROJECT_NAME = 'MovementVote';
+const BUILD_PROJECT_REGEX = /^MovementVote/;
+
+const REGION             = 'us-west-2';
+
 class StartBuild extends LambdaFunc {
   perform() {
-    var codebuild = new AWS.CodeBuild({region: 'us-west-2'});
+    var codebuild = new AWS.CodeBuild({region: REGION});
 
     var params = {
-      projectName: 'MovementVote', /* required */
+      projectName: BUILD_PROJECT_NAME, /* required */
       sourceVersion: 'normalize'
     };
     
@@ -19,19 +25,19 @@ class StartBuild extends LambdaFunc {
 
 class Deploy extends LambdaFunc {
   perform() {
-    var s3 = new AWS.S3({ region: 'us-west-2' });
+    var s3 = new AWS.S3({ region: REGION });
         
     let newBuildFiles;
     let oldBuildFiles;
 
-    s3.listObjects({Bucket:'movementvote'}).promise().then( d => {
+    s3.listObjects({Bucket:BUCKET_NAME}).promise().then( d => {
 
       const fileNames = d.Contents.map( c => c.Key );
-      newBuildFiles = fileNames.filter( f => /^MovementVote/.test(f) );
-      oldBuildFiles = fileNames.filter( f => !/^MovementVote/.test(f) );
+      newBuildFiles = fileNames.filter( f => BUILD_PROJECT_REGEX.test(f) );
+      oldBuildFiles = fileNames.filter( f => !BUILD_PROJECT_REGEX.test(f) );
 
       const dparams = {
-        Bucket: 'movementvote',
+        Bucket: BUCKET_NAME,
         Delete: { 
           Objects: oldBuildFiles.map( Key => ({ Key }) )
         },
@@ -60,14 +66,15 @@ const map = {
   '.htm':  'text/html',
   '.png':  'image/png',
   '.jpg':  'image/jpeg',
+  '.css':  'text/css'
 };
 
 const _calcParams = key => {
 
   const args = { 
-          CopySource:          'movementvote/' + key,
-          Key:                 key.replace('MovementVote/dist/public/', ''),
-          Bucket:              'movementvote',                                                  
+          CopySource:          BUCKET_NAME + '/' + key,
+          Key:                 key.replace(BUILD_PROJECT_NAME + '/dist/public/', ''),
+          Bucket:              BUCKET_NAME,
           ACL:                 'public-read',
           ServerSideEncryption: null 
         };
