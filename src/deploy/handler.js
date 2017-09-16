@@ -2,11 +2,11 @@ const AWS        = require('aws-sdk');
 const LambdaFunc = require('../lib/LambdaFunc');
 const path       = require('path');
 
-const BUCKET_NAME        = 'movementvote.org';
-const BUILD_PROJECT_NAME = 'MovementVote';
+const BUCKET_NAME         = 'movementvote.org';
+const BUILD_PROJECT_NAME  = 'MovementVote';
 const BUILD_PROJECT_REGEX = /^MovementVote/;
-
-const REGION             = 'us-west-2';
+const BUILD_BRANCH        = '';
+const REGION              = 'us-west-2';
 
 class StartBuild extends LambdaFunc {
   perform() {
@@ -14,7 +14,7 @@ class StartBuild extends LambdaFunc {
 
     var params = {
       projectName: BUILD_PROJECT_NAME, /* required */
-      sourceVersion: 'normalize'
+      sourceVersion: BUILD_BRANCH
     };
     
     codebuild.startBuild(params).promise()
