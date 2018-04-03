@@ -1,7 +1,7 @@
 # bellman
 gamechanger labs APIs
 
-Umbrella project for server side APIs used by Gamechanger Labs properties (movementvote.org)
+Umbrella project for server side APIs used by Gamechanger Labs properties (movement.vote)
 
 ## Stages
 
@@ -21,7 +21,7 @@ This project requires the [serverless](http://serverless.com) framework. Install
 npm i -g severless
 ````
 
-Make sure your AWS credentials are pointing to the gamechangerlabs AWS account and your region is set to Oregon (us-west-2). 
+Make sure your AWS credentials are pointing to the gamechangerlabs AWS account and your region is set to Oregon (us-west-2).
 This step is necessary to make the 'prod' stage APIs work properly.
 ````bash
 export AWS_PROFILE=my-gamechangerlabs-credentials-profile
@@ -29,7 +29,7 @@ export AWS_REGION=us-west-2
 ````
 
 ### Deploy
-There is no "build" step for the server APIs, just deploy. 
+There is no "build" step for the server APIs, just deploy.
 ````
 npm run deploy-dev
 npm run deploy-prod
@@ -58,7 +58,7 @@ To add an API:
 
 ### Workflow
 
-Work on a specific function can be done and then just deploy that. For example, if you're working on the function 'update' you can deploy just that function 
+Work on a specific function can be done and then just deploy that. For example, if you're working on the function 'update' you can deploy just that function
 ````
 cd src/plans
 serverless deploy function -f update -s dev
@@ -86,7 +86,7 @@ npm i https://github.com/Movement-2016/bellman --save
 import bellman from 'bellman';
 
 const getPlansAPI = () => {
-  
+
   // after the user is signed with an Identity Pool auth'd signin
 
   const {
@@ -106,7 +106,7 @@ const getPlansAPI = () => {
 
 const updateDonationPlan = plan => {
   const planAPI = getPlansAPI();
-  
+
   planAPI.update(plan)
             .then( result => console.log('Updated OK:', result ) )
             .catch( err => console.log( 'Update failed:', err ) )

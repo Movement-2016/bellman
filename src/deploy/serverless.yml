@@ -12,7 +12,7 @@ provider:
     - Effect: Allow
       Action:
         - s3:*
-      Resource: "arn:aws:s3:::movementvote.org/*"
+      Resource: "arn:aws:s3:::movement.vote/*"
     - Effect: Allow
       Action:
         - codebuild:StartBuild
@@ -35,4 +35,3 @@ functions:
           method: get
           cors: true
 #          authorizer: aws_iam
-

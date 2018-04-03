@@ -1,6 +1,6 @@
 service: contact
 
-custom: 
+custom:
   stage: "${opt:stage, self:provider.stage}"
   devIAM: ''
   prodIAM: '' # for now, allow for non logged in for all APIs, otherwise : aws_iam
@@ -12,9 +12,9 @@ provider:
   name: aws
   runtime: nodejs6.10
   region: us-west-2
-  environment: 
+  environment:
     SITE_TITLE: 'MovementVote'
-    ADMIN_EMAIL: 'advisor@movementvote.org'
+    ADMIN_EMAIL: 'advisor@movement.vote'
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -33,7 +33,7 @@ functions:
           request:
             parameters:
               querystrings:
-                email: true          
+                email: true
   party:
     handler: handler.party
     events:
@@ -45,7 +45,7 @@ functions:
           request:
             parameters:
               querystrings:
-                email: true          
+                email: true
   plan:
     handler: handler.plan
     events:
@@ -57,4 +57,4 @@ functions:
           request:
             parameters:
               querystrings:
-                email: true          
+                email: true

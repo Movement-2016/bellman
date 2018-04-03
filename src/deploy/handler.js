@@ -2,7 +2,7 @@ const AWS        = require('aws-sdk');
 const LambdaFunc = require('../lib/LambdaFunc');
 const path       = require('path');
 
-const BUCKET_NAME         = 'movementvote.org';
+const BUCKET_NAME         = 'movement.vote';
 const BUILD_PROJECT_NAME  = 'MovementVote';
 const BUILD_PROJECT_REGEX = /^MovementVote/;
 const BUILD_BRANCH        = '';
@@ -16,7 +16,7 @@ class StartBuild extends LambdaFunc {
       projectName: BUILD_PROJECT_NAME, /* required */
       sourceVersion: BUILD_BRANCH
     };
-    
+
     codebuild.startBuild(params).promise()
       .then( this.thenHandler )
       .catch( this.errorHandler );
@@ -26,7 +26,7 @@ class StartBuild extends LambdaFunc {
 class Deploy extends LambdaFunc {
   perform() {
     var s3 = new AWS.S3({ region: REGION });
-        
+
     let newBuildFiles;
     let oldBuildFiles;
 
@@ -38,7 +38,7 @@ class Deploy extends LambdaFunc {
 
       const dparams = {
         Bucket: BUCKET_NAME,
-        Delete: { 
+        Delete: {
           Objects: oldBuildFiles.map( Key => ({ Key }) )
         },
       };
@@ -71,12 +71,12 @@ const map = {
 
 const _calcParams = key => {
 
-  const args = { 
+  const args = {
           CopySource:          BUCKET_NAME + '/' + key,
           Key:                 key.replace(BUILD_PROJECT_NAME + '/dist/public/', ''),
           Bucket:              BUCKET_NAME,
           ACL:                 'public-read',
-          ServerSideEncryption: null 
+          ServerSideEncryption: null
         };
 
   const ext = path.parse(key).ext;

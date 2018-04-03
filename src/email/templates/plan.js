@@ -3,7 +3,7 @@ import commaize  from 'commaize';
 const headerTemplate = ({fname,lname,email,phone,wantsConsult}) => `
 Hi ${fname}!
 
-Here is your giving plan that you created at movementvote.org and requested be mailed to you.
+Here is your giving plan that you created at movement.vote and requested be mailed to you.
 
 Your info:
 ${fname} ${lname}
@@ -50,4 +50,3 @@ ${footerTemplate(plan.donations)}
 `;
 
 module.exports = planTemplate;
-
