@@ -7,7 +7,7 @@ module.exports = (dir,whitelist=[],allNE=false) => ({
   target: 'node',
   externals: allNE ? [] : [nodeExternals({modulesDir: path.join(dir, '../../node_modules'), whitelist })],
   module: {
-    loaders: [{
+    rules: [{
       test: /\.js$/,
       loaders: ['babel-loader'],
       include: [dir, path.join(dir, '../lib')],
