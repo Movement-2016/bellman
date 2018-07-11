@@ -13,8 +13,9 @@ provider:
   runtime: nodejs6.10
   region: us-west-2
   environment:
-    SITE_TITLE: 'MovementVote'
-    ADMIN_EMAIL: 'info@movement.vote'
+    SITE_TITLE: 'Movement Voter Project'
+    ADMIN_EMAIL_TO: '<info@movement.vote>'
+    ADMIN_EMAIL_FROM: 'movement.vote <info@movement.vote>'
   iamRoleStatements:
     - Effect: Allow
       Action:

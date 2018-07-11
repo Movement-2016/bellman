@@ -6,10 +6,11 @@ var ses = new aws.SES({
 });
 
 const SITE_TITLE = process.env.SITE_TITLE;
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+const ADMIN_EMAIL_TO = process.env.ADMIN_EMAIL_TO;
+const ADMIN_EMAIL_FROM = process.env.ADMIN_EMAIL_FROM;
 const SUBJECT_HEAD = `[${SITE_TITLE}] `;
 
-const email = ({ toWho = ADMIN_EMAIL, fromWho = ADMIN_EMAIL, subject, body }) => {
+const email = ({ toWho = ADMIN_EMAIL_TO, fromWho = ADMIN_EMAIL_FROM, subject, body }) => {
   const eParams = {
     Destination: {
       ToAddresses: [toWho],
