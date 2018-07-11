@@ -14,8 +14,7 @@ provider:
   region: us-west-2
   environment:
     SITE_TITLE: 'MovementVote'
-    ADMIN_EMAIL: 'melmanalex+mvptest@gmail.com'
-    # ADMIN_EMAIL: 'advisor@movement.vote'
+    ADMIN_EMAIL: 'info@movement.vote'
   iamRoleStatements:
     - Effect: Allow
       Action:
