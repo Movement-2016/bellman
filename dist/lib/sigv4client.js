@@ -1,9 +1,18 @@
+'use strict';
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-import CryptoJS from 'crypto-js';
-import axios from 'axios';
+var _cryptoJs = require('crypto-js');
 
-const sigV4ClientFactory = config => {
+var _cryptoJs2 = _interopRequireDefault(_cryptoJs);
+
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var sigV4ClientFactory = function sigV4ClientFactory(config) {
   var AWS_SHA_256 = 'AWS4-HMAC-SHA256';
   var AWS4_REQUEST = 'aws4_request';
   var AWS4 = 'AWS4';
@@ -21,15 +30,15 @@ const sigV4ClientFactory = config => {
   }
 
   function hash(value) {
-    return CryptoJS.SHA256(value);
+    return _cryptoJs2.default.SHA256(value);
   }
 
   function hexEncode(value) {
-    return value.toString(CryptoJS.enc.Hex);
+    return value.toString(_cryptoJs2.default.enc.Hex);
   }
 
   function hmac(secret, value) {
-    return CryptoJS.HmacSHA256(value, secret, { asBytes: true });
+    return _cryptoJs2.default.HmacSHA256(value, secret, { asBytes: true });
   }
 
   function buildCanonicalRequest(method, path, queryParams, headers, payload) {
@@ -65,7 +74,7 @@ const sigV4ClientFactory = config => {
   }
 
   function fixedEncodeURIComponent(str) {
-    const HEX_BASE = 16;
+    var HEX_BASE = 16;
     return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
       return '%' + c.charCodeAt(0).toString(HEX_BASE);
     });
@@ -103,7 +112,7 @@ const sigV4ClientFactory = config => {
     return AWS_SHA_256 + '\n' + datetime + '\n' + credentialScope + '\n' + hashedCanonicalRequest;
   }
 
-  const LEN = 8;
+  var LEN = 8;
 
   function buildCredentialScope(datetime, region, service) {
     return datetime.substr(0, LEN) + '/' + region + '/' + service + '/' + AWS4_REQUEST;
@@ -148,9 +157,11 @@ const sigV4ClientFactory = config => {
 
     var datetime = new Date().toISOString().replace(/\.\d{3}Z$/, 'Z').replace(/[:\-]|\.\d{3}/g, '');
     headers[X_AMZ_DATE] = datetime;
-    let parser = null;
+    var parser = null;
     if (typeof document === 'undefined') {
-      var { Url } = require('url');
+      var _require = require('url'),
+          Url = _require.Url;
+
       parser = new Url(awsSigV4Client.endpoint);
     } else {
       parser = document.createElement('a');
@@ -185,18 +196,18 @@ const sigV4ClientFactory = config => {
       headers: headers,
       data: body
     };
-    return axios(signedRequest);
+    return (0, _axios2.default)(signedRequest);
   };
 
   return awsSigV4Client;
 };
 
-const clientFactory = sigV4ClientConfig => {
+var clientFactory = function clientFactory(sigV4ClientConfig) {
 
   var sigV4Client = sigV4ClientFactory(sigV4ClientConfig);
 
-  const client = {
-    makeRequest: (request, additionalParams) => {
+  var client = {
+    makeRequest: function makeRequest(request, additionalParams) {
 
       if (request.body === undefined || request.body === '' || request.body === null || Object.keys(request.body).length === 0) {
         request.body = undefined;

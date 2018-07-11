@@ -8,7 +8,7 @@
     "deploy-prod": "./bin/deploy prod",
     "deploy-dev": "./bin/deploy dev",
     "remove": "./bin/deploy dev remove && ./bin/deploy prod remove",
-    "build-clients": "node bin/genclients && babel -d ./dist --source-root clients clients"
+    "build-clients": "node bin/genclients && npx babel clients --out-dir dist"
   },
   "repository": {
     "type": "git",
@@ -31,7 +31,7 @@
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
+    "babel-preset-env": "^1.7.0",
     "babelify": "^7.3.0",
     "eslint": "3.2.2",
     "eslint-plugin-import": "1.12.0",
