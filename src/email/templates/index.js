@@ -5,5 +5,5 @@ import plan from './plan';
 module.exports = {
   contact,
   party,
-  plan
+  plan,
 };

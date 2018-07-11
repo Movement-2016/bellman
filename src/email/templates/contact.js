@@ -1,4 +1,4 @@
-const contactTemplate = ({fname,lname,email,phone,message}) => `
+const contactTemplate = ({ fname, lname, email, phone, message }) => `
 
 First Name: ${fname}
 Last Name: ${lname}
