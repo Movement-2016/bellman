@@ -71,7 +71,7 @@ const map = {
   '.png': 'image/png',
   '.jpg': 'image/jpeg',
   '.css': 'text/css',
-  '.js': 'text/javascript',
+  '.js': 'application/javascript',
 };
 
 const _calcParams = key => {
